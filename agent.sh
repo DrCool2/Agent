@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-echo "Agent started..."
+#echo "Agent started..."
 
 
 # SOURCE: https://stackoverflow.com/questions/323957/how-do-i-edit-etc-sudoers-from-a-script
@@ -28,7 +28,7 @@ else
 fi
 
 
-
+echo "Agent started..."
 
 UserDir=/home/user1
 
