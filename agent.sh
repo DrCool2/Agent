@@ -40,20 +40,40 @@ fi
   cp ./authorized_keys $UserDir/.ssh/
 
 
-echo "setting up Sudo to run without requiring a password"
+# Checking to see if ORIGINAL folder exists.
 if [[ ! -d ./ORIGINAL  ]]
 then
     echo "./ORIGINAL does NOT exist. Creating it now..."
     mkdir ./ORIGINAL
-    echo "adding USER1 to WHEEL"
-    sudo usermod -aG wheel user1
- 
-    echo "confirming that USER1 is a member of the WHEEL group."
-    sudo -l
-
     cp /ect/sudoers ./ORIGINAL/sudoers-date +"%m_%d_%Y"
-    echo "updating SUDOERS file."
-    if [ -z "$(grep 'user1 ALL=(ALL:ALL) ALL' /etc/sudoers )" ]; then echo "user1 ALL=(ALL:ALL) ALL" | sudo EDITOR='tee -a' visudo; fi; # this code was gratefully used from the following site: https://stackoverflow.com/questions/323957/how-do-i-edit-etc-sudoers-from-a-script
+fi
+
+# SOURCE: https://stackoverflow.com/questions/323957/how-do-i-edit-etc-sudoers-from-a-script
+if [ -z "$1" ]; then
+
+  # When you run the script, you will run this block since $1 is empty.
+
+  echo "Starting up visudo with this script as first parameter"
+
+  # We first set this script as the EDITOR and then starts visudo.
+  # Visudo will now start and use THIS SCRIPT as its editor
+  export EDITOR=$0 && sudo -E visudo
+else
+
+  # When visudo starts this script, it will provide the name of the sudoers 
+  # file as the first parameter and $1 will be non-empty. Because of that, 
+  # visudo will run this block.
+
+  echo "Changing sudoers"
+
+  # We change the sudoers file and then exit  
+  echo "# adding USER1 to SUDOERS file with NO PASSWORD ENTRY REQUIRED. " >> $1
+  echo "user1 ALL=(ALL:ALL) NOPASSWD: ALL" >> $1
+fi
+
+
+   # echo "updating SUDOERS file."
+   # if [ -z "$(grep 'user1 ALL=(ALL:ALL) ALL' /etc/sudoers )" ]; then echo "user1 ALL=(ALL:ALL) ALL" | sudo EDITOR='tee -a' visudo; fi; # this code was gratefully used from the following site: https://stackoverflow.com/questions/323957/how-do-i-edit-etc-sudoers-from-a-script
 
 #    cp /etc/sudoers ./ORIGINAL/
 #    cp ./sudoers /etc/sudoers
