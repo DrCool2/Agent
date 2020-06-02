@@ -8,8 +8,6 @@ UserDir=/home/user1
 read -p "Enter Desired Hostname: " ComputerName
 echo "Your computer name is: $ComputerName!"
 read -s -p "Enter Root Password: " RootPassword
-su root
-
 
 echo "Stopping and disabling firewalld"
 systemctl stop firewalld
@@ -24,20 +22,33 @@ echo "Running yum install for sysadmin tools"
 yum -y install tmux nano sudo
 
 echo "Installing public keys"
-mkdir /root/.ssh/
-chmod 700 /root/.ssh/
-cp ./authorized_keys /root/.ssh/
+if [[ -f "/root/.ssh" ]]
+then
+  rm -r /root/.ssh
+fi
+  mkdir /root/.ssh/
+  chmod 700 /root/.ssh/
+  cp ./authorized_keys /root/.ssh/
 
-mkdir ~/.ssh
-chown user1 ~/.ssh
-chmod 700 ~/.ssh
-cp ./authorized_keys $UserDir/.ssh/
+if [[ -f "$UserDir/.ssh"  ]]
+then
+  rm -r $UserDir/.ssh
+fi
+  mkdir $UserDir/.ssh
+  chown user1 $UserDir/.ssh
+  chmod 700 $UserDir/.ssh
+  cp ./authorized_keys $UserDir/.ssh/
 
 
 echo "setting up Sudo to run without requiring a password"
+if [[ ! -f ./ORIGINAL  ]]
+then
+echo "./ORIGINAL does NOT exist. Creating it now..."
 mkdir ./ORIGINAL
 cp /etc/sudoers ./ORIGINAL/
 cp ./sudoers /etc/sudoers
+fi
+
 echo "Please test and see if Sudo without a password works."
 echo "sudo nano hi.txt"
 
