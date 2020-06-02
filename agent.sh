@@ -24,6 +24,9 @@ echo "Installing public keys"
 mkdir /root/.ssh/
 chmod 700 /root/.ssh/
 cp ./authorized_keys /root/.ssh/
+
+mkdir ~/.ssh
+chmod 700 ~/.ssh
 cp ./authorized_keys $UserDir/.ssh/
 
 
