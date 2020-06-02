@@ -5,6 +5,9 @@ echo "Agent started..."
 
 UserDir=/home/user1
 
+read -p "Enter Desired Hostname: " ComputerName
+echo "Your computer name is: $ComputerName!"
+
 echo "Stopping and disabling firewalld"
 systemctl stop firewalld
 systemctl disable firewalld
@@ -24,11 +27,12 @@ cp ./authorized_keys /root/.ssh/
 cp ./authorized_keys $UserDir/.ssh/
 
 
-#echo "setting up Sudo to run without requiring a password"
-#mkdir ./ORIGINAL
-#cp /etc/sudoers ./ORIGINAL/
-#cp ./sudoers /etc/sudoers
-
+echo "setting up Sudo to run without requiring a password"
+mkdir ./ORIGINAL
+cp /etc/sudoers ./ORIGINAL/
+cp ./sudoers /etc/sudoers
+echo "Please test and see if Sudo without a password works."
+echo "sudo nano hi.txt"
 
 echo "Agent completed running."
 
