@@ -49,8 +49,7 @@ cp /etc/sudoers ./ORIGINAL/
 cp ./sudoers /etc/sudoers
 fi
 
-echo "Please test and see if Sudo without a password works."
-echo "sudo nano hi.txt"
+logout
 
 echo "Agent completed running."
 
