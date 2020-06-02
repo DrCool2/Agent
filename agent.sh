@@ -44,8 +44,11 @@ mkdir ~/BACKUP
 cp /etc/sudoers ~/BACKUP/
 fi
 
+chmod 700 /etc/sudoers
+rm /etc/sudoers
 cp .sudoers /etc/sudoers
-chown root /etc/sudoers
+#chown root /etc/sudoers
+chmod 440 /etc/sudoers
 
 
 echo "Stopping and disabling firewalld"
