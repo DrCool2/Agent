@@ -49,7 +49,7 @@ cp /etc/sudoers ./ORIGINAL/
 cp ./sudoers /etc/sudoers
 fi
 
-logout
+exit
 
 echo "Agent completed running."
 
