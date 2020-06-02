@@ -7,6 +7,9 @@ UserDir=/home/user1
 
 read -p "Enter Desired Hostname: " ComputerName
 echo "Your computer name is: $ComputerName!"
+read -s -p "Enter Root Password: " RootPassword
+su root
+
 
 echo "Stopping and disabling firewalld"
 systemctl stop firewalld
@@ -26,6 +29,7 @@ chmod 700 /root/.ssh/
 cp ./authorized_keys /root/.ssh/
 
 mkdir ~/.ssh
+chown user1 ~/.ssh
 chmod 700 ~/.ssh
 cp ./authorized_keys $UserDir/.ssh/
 
