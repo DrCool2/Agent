@@ -2,12 +2,12 @@
 #Agent is a Linux Customization App, designed to efficiently assist with the setup and maintenance of new machines.
 echo "Agent started..."
 
-Bailout() {
+BailOut() {
 echo "FATAL ERROR!"
 echo "$1"
 echo "Script exiting!"
 exit #exit entire script
-} #End Bailout
+} #End BailOut
 
 CheckForAgentUpdates() {
 #this function checks for agent updates via git
@@ -33,7 +33,7 @@ CheckForAgentUpdates() {
             ./agent.sh #launch updated copy of script
             exit #abort older parent process
             else
-            Bailout "You have merge conflicts!  Fix these!"
+            BailOut "You have merge conflicts!  Fix these!"
             fi
         fi
 } #end CheckForAgentUpdates
