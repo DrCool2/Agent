@@ -7,7 +7,7 @@ UserDir=/home/user1
 
 read -p "Enter Desired Hostname: " ComputerName
 echo "Your computer name is: $ComputerName!"
-read -s -p "Enter Root Password: " RootPassword
+#read -s -p "Enter Root Password: " RootPassword
 
 echo "Stopping and disabling firewalld"
 systemctl stop firewalld
@@ -24,7 +24,7 @@ yum -y install tmux nano sudo
 echo "Installing public keys"
 if [[ -f "/root/.ssh" ]]
 then
-  rm -r /root/.ssh
+ sudo rm -r /root/.ssh/
 fi
   mkdir /root/.ssh/
   chmod 700 /root/.ssh/
