@@ -22,7 +22,7 @@ echo "Running yum install for sysadmin tools"
 yum -y install tmux nano sudo
 
 echo "Installing public keys"
-if [[ -f "/root/.ssh" ]]
+if [[ -d "/root/.ssh" ]]
 then
  sudo rm -r /root/.ssh/
 fi
@@ -30,7 +30,7 @@ fi
   chmod 700 /root/.ssh/
   cp ./authorized_keys /root/.ssh/
 
-if [[ -f "$UserDir/.ssh"  ]]
+if [[ -d "$UserDir/.ssh"  ]]
 then
   rm -r $UserDir/.ssh
 fi
@@ -41,7 +41,7 @@ fi
 
 
 echo "setting up Sudo to run without requiring a password"
-if [[ ! -f ./ORIGINAL  ]]
+if [[ ! -d ./ORIGINAL  ]]
 then
 echo "./ORIGINAL does NOT exist. Creating it now..."
 mkdir ./ORIGINAL
