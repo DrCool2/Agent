@@ -1,6 +1,4 @@
 #!/bin/bash
-
-
 echo "Agent started..."
 
 UserDir=/home/user1
