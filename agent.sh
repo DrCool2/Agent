@@ -41,6 +41,7 @@ echo " Checking for script update via git..."
         else
         BailOut " You have merge conflicts!  Fix these!"
         fi
+echo " Completed checking for script update via git..."
 } #end CheckForAgentUpdates
 
 #do something fancy that hopefully works
