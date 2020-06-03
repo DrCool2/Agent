@@ -32,7 +32,7 @@ echo "Checking for agent update via git..."
 } #end CheckForAgentUpdates
 
 #do something fancy that hopefully works
-CheckForAgentUpdates
+#CheckForAgentUpdates
 
 
 UserDir=/home/user1
