@@ -72,7 +72,6 @@ unset SCRIPTDIR #our time together was so short
 GitUpdate
 
 echo "Main program begin..."
-exit
 
 UserDir=/home/user1
 
