@@ -18,10 +18,20 @@ CheckForAgentUpdatesViaGit() {
 echo " Checking for script update via git..."
 
 #pull the newest code.  the repository should be public over https without any authentication required
-    #this is similar to gull pull but more careful since we check for merge conflicts
+    #this is similar to gull pull but more careful since we check for merge conflicts and uncommited changes in our local tree
+  
+    #is our working tree clean?
+    git status | grep "nothing to commit, working tree clean"
+        #check return code to see if our working tree is clean with no local modifications
+        if [ "$?" = "0" ]; then
+        echo " Git says our working tree is clean, so we can try updating..."
+        else
+        BailOut "Git says our working tree is not clean.  Run git status for more info."
+        fi
+
+    #ok, our working tree is clean, but are we already up to date?
     #check repo
     git fetch
-    #are we already up to date?
     git status | grep "Your branch is up to date"
         #check return code to see if we are up to date
         if [ "$?" = "0" ]; then
@@ -31,13 +41,6 @@ echo " Checking for script update via git..."
         return #run rest of program
         fi
 
-    git status | grep "nothing to commit, working tree clean"
-        #check return code to see if our working tree is clean with no local modifications
-        if [ "$?" = "0" ]; then
-        echo " Git says our working tree is clean, so we can try updating..."
-        else
-        BailOut "Git says our working tree is not clean.  Run git status for more info."
-        fi
     echo " Git says we are out-dated."
     echo " Trying to upgrade via git..."
     git merge --ff-only
