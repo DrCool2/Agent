@@ -2,6 +2,8 @@
 #Agent is a Linux Customization App, designed to efficiently assist with the setup and maintenance of new machines.
 echo "Agent started..."
 
+#static:bb19f409b1fac454f95e242a5
+
 BailOut() {
 echo "BailOut: FATAL ERROR!"
 echo "BailOut: $1"
