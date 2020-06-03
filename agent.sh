@@ -15,7 +15,7 @@ CheckForAgentUpdates() {
 #this function checks for agent updates via git
 #ASSUMPTION: whatever program we are in was something we got via git, and thus that we are in a git repository
 #ASSUMPTION: That the commands within can be ran without any user-interaction.  i.e. that the git repository either requires no authentication or that the administrator has handled this already for us so we can run without interaction
-echo "Checking for agent update via git..."
+echo " Checking for agent update via git..."
 
 #pull the newest code.  the repository should be public over https without any authentication required
     #this is similar to gull pull but more careful since we check for merge conflicts
@@ -25,21 +25,21 @@ echo "Checking for agent update via git..."
     git status | grep "Your branch is up to date"
         #check return code to see if we are up to date
         if [ "$?" = "0" ]; then
-        echo "Git says we are already up to date..."
+        echo " Git says we are already up to date..."
         #no further action needed, we can just run what we have locally since it's up to date
         return #run rest of program
         fi
-        
-        echo "Trying to upgrade via git..."
+        echo " Git says we are out-dated."
+        echo " Trying to upgrade via git..."
         git merge --ff-only
         #process return code to see if there are merge conflicts.  Return code will be 0 if git pull is successful.
         if [ "$?" = "0" ]; then
-        echo "No git errors detected during our upgrade..."
-        echo "Launching updated copy of script..."
+        echo " No git errors detected during our upgrade..."
+        echo " Launching updated copy of script..."
         ./agent.sh #launch updated copy of script
         exit #abort older parent process
         else
-        BailOut "You have merge conflicts!  Fix these!"
+        BailOut " You have merge conflicts!  Fix these!"
         fi
 } #end CheckForAgentUpdates
 
