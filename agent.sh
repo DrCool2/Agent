@@ -7,12 +7,13 @@ UserDir=/home/user1
 
 read -p "Enter Desired Hostname: " ComputerName
 if [[ ! ComputerName  ]]
-ComputerName = hostname
-echo "Your computer name is: $ComputerName!"
-sleep 1s
-then
-echo "Your computer name is: $ComputerName!"
-#read -s -p "Enter Root Password: " RootPassword
+  then
+  ComputerName = hostname
+  echo "Your computer name is: $ComputerName!"
+  sleep 1s
+else
+  echo "Your computer name is: $ComputerName!"
+  fi
 
 if [[ -d "~/BACKUP"  ]]
 then
