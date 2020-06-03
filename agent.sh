@@ -2,7 +2,7 @@
 #Agent is a Linux Customization App, designed to efficiently assist with the setup and maintenance of new machines.
 echo "Agent started..."
 
-#static:bab19f40zzb1fac454f95e242
+#static:002zz19f40zzb1fac454f95e242
 
 BailOut() {
 echo "BailOut: FATAL ERROR!"
@@ -11,7 +11,7 @@ echo "BailOut: Script exiting!"
 exit #exit entire script
 } #End BailOut
   
-CheckForAgentUpdates() {
+CheckForAgentUpdatesViaGit() {
 #this function checks for agent updates via git
 #ASSUMPTION: whatever program we are in was something we got via git, and thus that we are in a git repository
 #ASSUMPTION: That the commands within can be ran without any user-interaction.  i.e. that the git repository either requires no authentication or that the administrator has handled this already for us so we can run without interaction
@@ -36,7 +36,7 @@ echo " Checking for agent update via git..."
         if [ "$?" = "0" ]; then
         echo " No git errors detected during our upgrade..."
         echo " Launching updated copy of script..."
-        ./agent.sh #launch updated copy of script
+        $0 #launch updated copy of script
         exit #abort older parent process
         else
         BailOut " You have merge conflicts!  Fix these!"
@@ -44,7 +44,7 @@ echo " Checking for agent update via git..."
 } #end CheckForAgentUpdates
 
 #do something fancy that hopefully works
-CheckForAgentUpdates
+CheckForAgentUpdatesViaGit
 
 echo "main program run";exit
 UserDir=/home/user1
