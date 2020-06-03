@@ -19,7 +19,7 @@ CheckForAgentUpdates() {
     #this is similar to gull pull but more careful
     git fetch
         #process return code to see if we are already up to date.  Return code will be 0 if git pull is successful.
-        if [ "$?" = "0"]; then
+        if [ "$?" = "0" ]; then
         echo "Git says we are already up to date..."
         #no further action needed, we can just run what we have locally since it's up to date
         else
@@ -27,7 +27,7 @@ CheckForAgentUpdates() {
             echo "Trying to upgrade via git..."
             git merge --ff-only
             #process return code to see if there are merge conflicts.  Return code will be 0 if git pull is successful.
-            if [ "$?" = "0"]; then
+            if [ "$?" = "0" ]; then
             echo "No git errors detected during our upgrade..."
             echo "Launching updated copy of script..."
             ./agent.sh #launch updated copy of script
