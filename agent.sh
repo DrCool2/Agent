@@ -8,7 +8,7 @@ echo "BailOut: $1"
 echo "BailOut: Script exiting!"
 exit #exit entire script
 } #End BailOut
-
+  
 CheckForAgentUpdates() {
 #this function checks for agent updates via git
 #ASSUMPTION: whatever program we are in was something we got via git, and thus that we are in a git repository
