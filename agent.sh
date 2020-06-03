@@ -17,7 +17,7 @@ CheckForAgentUpdatesViaGit() {
 #ASSUMPTION: That the commands within can be ran without any user-interaction.  i.e. that the git repository either requires no authentication or that the administrator has handled this already for us so we can run without interaction
 echo " Checking for script update via git..."
 
-#pull the newest code.  the repository should be public over https without any authentication required
+#pull the newest code.  
     #this is similar to gull pull but more careful since we check for merge conflicts and uncommited changes in our local tree
   
     #is our working tree clean?
@@ -43,8 +43,8 @@ echo " Checking for script update via git..."
 
     echo " Git says we are out-dated."
     echo " Trying to upgrade via git..."
-    git merge --ff-only
-    #process return code to see if there are merge conflicts.  Return code will be 0 if git pull is successful.
+    git merge --ff-only  #a git pull that doesn't do merge conflicts
+    #process return code to see if there are merge conflicts.  Return code will be 0 if "git pull" is successful.
     if [ "$?" = "0" ]; then
     echo " No git errors detected during our upgrade..."
     echo " Launching updated copy of script..."
