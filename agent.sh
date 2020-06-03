@@ -32,9 +32,9 @@ echo "Checking for agent update via git..."
 } #end CheckForAgentUpdates
 
 #do something fancy that hopefully works
-#CheckForAgentUpdates
+CheckForAgentUpdates
 
-
+echo "main program run";exit
 UserDir=/home/user1
 
 echo "Stopping and disabling firewalld"
