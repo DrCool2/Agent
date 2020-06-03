@@ -27,6 +27,7 @@ echo " Checking for script update via git..."
         if [ "$?" = "0" ]; then
         echo " Git says we are already up to date..."
         #no further action needed, we can just run what we have locally since it's up to date
+        echo " Completed checking for script update via git..."
         return #run rest of program
         fi
         echo " Git says we are out-dated."
@@ -41,7 +42,6 @@ echo " Checking for script update via git..."
         else
         BailOut " You have merge conflicts!  Fix these!"
         fi
-echo " Completed checking for script update via git..."
 } #end CheckForAgentUpdates
 
 #do something fancy that hopefully works
