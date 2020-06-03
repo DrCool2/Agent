@@ -1,38 +1,16 @@
 #!/bin/bash
 
 
-#echo "Agent started..."
-
-
-# SOURCE: https://stackoverflow.com/questions/323957/how-do-i-edit-etc-sudoers-from-a-script
-#if [ -z "$1" ]; then
-
-  # When you run the script, you will run this block since $1 is empty.
-
-#  echo "Starting up visudo with this script as first parameter"
-
-  # We first set this script as the EDITOR and then starts visudo.
-  # Visudo will now start and use THIS SCRIPT as its editor
-#  export EDITOR=$0 && sudo -E visudo
-#else
-
-  # When visudo starts this script, it will provide the name of the sudoers
-  # file as the first parameter and $1 will be non-empty. Because of that,
-  # visudo will run this block.
-
-#  echo "Changing sudoers"
-
-  # We change the sudoers file and then exit
-#  echo "# adding USER1 to SUDOERS file with NO PASSWORD ENTRY REQUIRED. " >> $1
-#  echo "user1 ALL=(ALL:ALL) NOPASSWD: ALL" >> $1
-#fi
-
-
 echo "Agent started..."
 
 UserDir=/home/user1
 
 read -p "Enter Desired Hostname: " ComputerName
+if [[ ! ComputerName  ]]
+ComputerName = hostname
+echo "Your computer name is: $ComputerName!"
+sleep 1s
+then
 echo "Your computer name is: $ComputerName!"
 #read -s -p "Enter Root Password: " RootPassword
 
