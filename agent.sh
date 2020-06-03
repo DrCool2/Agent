@@ -2,7 +2,7 @@
 #Agent is a Linux Customization App, designed to efficiently assist with the setup and maintenance of new machines.
 echo "Agent started..."
 
-#static:004zz19f40zzb1fac454f95e242
+#static:005zz19f40zzb1fac454f95e242
 
 BailOut() {
 echo "BailOut: FATAL ERROR!"
@@ -20,7 +20,15 @@ local SCRIPTDIR="$( cd "$(dirname "$0")" ; pwd -P )"   #directory this script is
 cd $SCRIPTDIR  #gotta cd (in case someone ran us like "cd /tmp;/root/script.sh") so later git commands will be in the repository we are in
 unset SCRIPTDIR #our time together was so short
 
-#local git repo sanity checks
+#local git repo sanity checks.  let's not make ANY assumptions here
+    #do we have unpushed commits?
+    git status | grep "Your branch is ahead of"
+        if [ "$?" = "0" ]; then
+        BailOut " Git says we have unpushed commits.  Please discard these or push them."
+        else
+        echo " Git says our branch has no unpushed commits."
+        fi
+
     #is our working tree clean?
     git status | grep "nothing to commit, working tree clean"
         #check return code to see if our working tree is clean with no local modifications
