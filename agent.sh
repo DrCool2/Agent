@@ -19,7 +19,11 @@ echo "Checking for agent update via git..."
 
 #pull the newest code.  the repository should be public over https without any authentication required
     #this is similar to gull pull but more careful since we check for merge conflicts
+    #check repo
     git fetch
+    #are we already up to date?
+    git status | grep "Your branch is up to date"
+        #check return code to see if we are up to date
         if [ "$?" = "0" ]; then
         echo "Git says we are already up to date..."
         #no further action needed, we can just run what we have locally since it's up to date
