@@ -15,7 +15,9 @@ GitUpdate() {
 #PURPOSE: this function checks for script updates via git.  It then performs an update via git and launches the new copy of the calling script.  this is vaguely similar to gull pull but more careful since we check for merge conflicts and uncommited changes in our local tree
 #ASSUMPTION: whatever program we are in was something we got via git, and thus that we are in a git repository
 #ASSUMPTION: That the commands within can be ran without any user-interaction.  i.e. that the git repository either requires no authentication or that the administrator has handled this already for us so we can run without interaction
-echo " GitUpdate begin."
+echo " GitUpdate Begin."
+
+#cd to calling script directory so we can run git commands
 local SCRIPTDIR="$( cd "$(dirname "$0")" ; pwd -P )"   #directory this script is in
 cd $SCRIPTDIR  #gotta cd (in case someone ran us like "cd /tmp;/root/script.sh") so later git commands will be in the repository we are in
 unset SCRIPTDIR #our time together was so short
