@@ -18,8 +18,6 @@ GitUpdate() {
     GitUpdate
     echo "More scripty stuff."
 
-    #Explanation: If system is in DataSaver mode, you can skip the high-bandwidth part of your scripts/functions.
-
     Note:
     #ASSUMPTION: whatever program we are in was something we got via git, and thus that we are in a git repository
     #ASSUMPTION: That the commands within can be ran without any user-interaction.  i.e. that the git repository either requires no authentication or that the administrator has handled this already for us so we can run without interaction
