@@ -12,17 +12,15 @@ exit #exit entire script
 } #End BailOut
   
 CheckForAgentUpdatesViaGit() {
-#this function checks for script updates via git
+#PURPOSE: this function checks for script updates via git.  this is similar to gull pull but more careful since we check for merge conflicts and uncommited changes in our local tree
 #ASSUMPTION: whatever program we are in was something we got via git, and thus that we are in a git repository
 #ASSUMPTION: That the commands within can be ran without any user-interaction.  i.e. that the git repository either requires no authentication or that the administrator has handled this already for us so we can run without interaction
 echo " Checking for script update via git..."
 local SCRIPTDIR="$( cd "$(dirname "$0")" ; pwd -P )"   #directory this script is in
 cd $SCRIPTDIR  #gotta cd (in case someone ran us like "cd /tmp;/root/script.sh") so later git commands will be in the repository we are in
-unset SCRIPTDIR #cya
+unset SCRIPTDIR #our time together was so short
 
-#pull the newest code.  
-    #this is similar to gull pull but more careful since we check for merge conflicts and uncommited changes in our local tree
-  
+#local git repo sanity checks
     #is our working tree clean?
     git status | grep "nothing to commit, working tree clean"
         #check return code to see if our working tree is clean with no local modifications
@@ -44,21 +42,22 @@ unset SCRIPTDIR #cya
         return #run rest of program
         fi
 
+#sanity checks complete, attempting to upgrade
     echo " Git says we are out-dated."
     echo " Trying to upgrade via git..."
     git merge --ff-only  #a git pull that doesn't do merge conflicts
-    #process return code to see if there are merge conflicts.  Return code will be 0 if "git pull" is successful.
+    #process return code to see if there are merge conflicts.  Return code will be 0 if "git pull" is successful.  there shouldn't be merge conflicts since we already checked to make sure the working directory was clean...but...
     if [ "$?" = "0" ]; then
     echo " No git errors detected during our upgrade..."
     echo " Launching updated copy of script..."
     $0 #launch updated copy of script
-    exit #abort older parent process
+    exit #abort this older copy
     else
     BailOut " You have merge conflicts!  Fix these!"
     fi
 } #end CheckForAgentUpdates
 
-#do something fancy that hopefully works
+#auto update
 CheckForAgentUpdatesViaGit
 
 echo "main program run";exit
