@@ -8,13 +8,15 @@ UserDir=/home/user1
 read -p "Enter Desired Hostname: " ComputerName
 if [ -z $ComputerName ]
 then
-  ComputerName = $(hostname)
+  ComputerName=$(hostname)
   echo "Your current computer name is: "$ComputerName"!"
   sleep 1s
 else
   echo "Your computer name is: "$ComputerName!"!"
 fi
 
+echo "installing the latest version of Ruby"
+\curl -sSL https://get.rvm.io | bash -s stable
 sleep 3s
 
 if [[ -d "~/BACKUP"  ]]
