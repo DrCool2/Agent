@@ -30,18 +30,26 @@ echo " Checking for script update via git..."
         echo " Completed checking for script update via git..."
         return #run rest of program
         fi
-        echo " Git says we are out-dated."
-        echo " Trying to upgrade via git..."
-        git merge --ff-only
-        #process return code to see if there are merge conflicts.  Return code will be 0 if git pull is successful.
+
+    git status | grep "nothing to commit, working tree clean"
+        #check return code to see if our working tree is clean with no local modifications
         if [ "$?" = "0" ]; then
-        echo " No git errors detected during our upgrade..."
-        echo " Launching updated copy of script..."
-        $0 #launch updated copy of script
-        exit #abort older parent process
+        echo " Git says our working tree is clean, so we can try updating..."
         else
-        BailOut " You have merge conflicts!  Fix these!"
+        BailOut "Git says our working tree is not clean.  Run git status for more info."
         fi
+    echo " Git says we are out-dated."
+    echo " Trying to upgrade via git..."
+    git merge --ff-only
+    #process return code to see if there are merge conflicts.  Return code will be 0 if git pull is successful.
+    if [ "$?" = "0" ]; then
+    echo " No git errors detected during our upgrade..."
+    echo " Launching updated copy of script..."
+    $0 #launch updated copy of script
+    exit #abort older parent process
+    else
+    BailOut " You have merge conflicts!  Fix these!"
+    fi
 } #end CheckForAgentUpdates
 
 #do something fancy that hopefully works
