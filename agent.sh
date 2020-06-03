@@ -2,41 +2,6 @@
 #Agent is a Linux Customization App, designed to efficiently assist with the setup and maintenance of new machines.
 echo "Agent started..."
 
-BailOut() {
-echo "BailOut: FATAL ERROR!"
-echo "BailOut: $1"
-echo "BailOut: Script exiting!"
-exit #exit entire script
-} #End BailOut
-  
-CheckForAgentUpdates() {
-#this function checks for agent updates via git
-#ASSUMPTION: whatever program we are in was something we got via git, and thus that we are in a git repository
-#ASSUMPTION: That the commands within can be ran without any user-interaction.  i.e. that the git repository either requires no authentication or that the administrator has handled this already for us so we can run without interaction
-echo "Checking for agent update via git..."
-
-#pull the newest code.  the repository should be public over https without any authentication required
-    #this is similar to gull pull but more careful since we check for merge conflicts
-    git fetch
-        echo "Trying to upgrade via git..."
-        git merge --ff-only
-        #process return code to see if there are merge conflicts.  Return code will be 0 if git pull is successful.
-        if [ "$?" = "0" ]; then
-        echo "No git errors detected during our upgrade..."
-        echo "Launching updated copy of script..."
-        ./agent.sh #launch updated copy of script
-        exit #abort older parent process
-        else
-        BailOut "You have merge conflicts!  Fix these!"
-        fi
-} #end CheckForAgentUpdates
-
-#do something fancy that hopefully works
-#CheckForAgentUpdates
-
-
-UserDir=/home/user1
-
 echo "Stopping and disabling firewalld"
 systemctl stop firewalld
 systemctl disable firewalld
