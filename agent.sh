@@ -18,6 +18,12 @@ echo "Checking for agent update via git..."
 #pull the newest code.  the repository should be public over https without any authentication required
     #this is similar to gull pull but more careful since we check for merge conflicts
     git fetch
+        if [ "$?" = "0" ]; then
+        echo "Git says we are already up to date..."
+        #no further action needed, we can just run what we have locally since it's up to date
+        return #run rest of program
+        fi
+        
         echo "Trying to upgrade via git..."
         git merge --ff-only
         #process return code to see if there are merge conflicts.  Return code will be 0 if git pull is successful.
