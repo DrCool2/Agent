@@ -15,8 +15,6 @@ else
   echo "Your computer name is: "$ComputerName!"!"
 fi
 
-echo "installing the latest version of Ruby"
-\curl -sSL https://get.rvm.io | bash -s stable
 sleep 3s
 
 if [[ -d "~/BACKUP"  ]]
@@ -37,10 +35,6 @@ chmod 440 /etc/sudoers
 echo "Stopping and disabling firewalld"
 systemctl stop firewalld
 systemctl disable firewalld
-
-echo "Running yum update"
-#yum update
-yum check-update
 
 echo "Running yum install for sysadmin tools"
 #this command will work for interactive sessions but it's likely that " /usr/bin/apt-get -qq --no-upgrade" will need to be used for when we progress to being run by cron
@@ -72,6 +66,13 @@ then
     mkdir ./ORIGINAL
     cp /ect/sudoers ./ORIGINAL/sudoers-date +"%m_%d_%Y"
 fi
+
+
+echo "Installing Ruby on Rails lastest"
+\curl -sSL https://get.rvm.io | bash -s stable --rails
+ruby -v
+rails -v
+sleep 3s
 
 echo "Agent completed running."
 
