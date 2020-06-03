@@ -10,9 +10,21 @@ exit #exit entire script
 } #End BailOut
   
 GitUpdate() {
-#PURPOSE: this function checks for script updates via git.  It then performs an update via git and launches the new copy of the calling script.  this is vaguely similar to gull pull but more careful since we check for merge conflicts and uncommited changes in our local tree
-#ASSUMPTION: whatever program we are in was something we got via git, and thus that we are in a git repository
-#ASSUMPTION: That the commands within can be ran without any user-interaction.  i.e. that the git repository either requires no authentication or that the administrator has handled this already for us so we can run without interaction
+: <<'END_COMMENT_BLOCK'  #this is a comment block
+    #Purpose: checks for script updates via git.  It then performs an update via git and launches the new copy of the calling script.  this is vaguely similar to gull pull but more careful since we check for merge conflicts and uncommited changes in our local tree
+
+    #Usage Example:
+    echo "Script starting up!"
+    GitUpdate
+    echo "More scripty stuff."
+
+    #Explanation: If system is in DataSaver mode, you can skip the high-bandwidth part of your scripts/functions.
+
+    Note:
+    #ASSUMPTION: whatever program we are in was something we got via git, and thus that we are in a git repository
+    #ASSUMPTION: That the commands within can be ran without any user-interaction.  i.e. that the git repository either requires no authentication or that the administrator has handled this already for us so we can run without interaction
+
+END_COMMENT_BLOCK
 echo " GitUpdate Begin."
 
 #cd to calling script directory so we can run git commands
