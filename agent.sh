@@ -15,6 +15,8 @@ else
   echo "Your computer name is: $ComputerName!"
   fi
 
+sleep 3s
+
 if [[ -d "~/BACKUP"  ]]
 then
 cp /etc/sudoers ~/BACKUP/
