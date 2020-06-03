@@ -3,9 +3,9 @@
 echo "Agent started..."
 
 BailOut() {
-echo "FATAL ERROR!"
-echo "$1"
-echo "Script exiting!"
+echo "BailOut: FATAL ERROR!"
+echo "BailOut: $1"
+echo "BailOut: Script exiting!"
 exit #exit entire script
 } #End BailOut
 
