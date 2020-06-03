@@ -6,7 +6,7 @@ echo "Agent started..."
 UserDir=/home/user1
 
 read -p "Enter Desired Hostname: " ComputerName
-if [[ ! ComputerName  ]]
+if [[ -z $ComputerName  ]]
   then
   ComputerName = $(hostname)
   echo "Your current computer name is: $ComputerName!"
