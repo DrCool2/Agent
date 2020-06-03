@@ -63,7 +63,7 @@ unset SCRIPTDIR #our time together was so short
 #local repo sanity checks complete, attempting to upgrade
     echo " Git says we are out-dated."
     echo " Trying to upgrade via git..."
-    git merge --ff-only  #a git pull that doesn't do merge conflicts
+    git merge --ff-only  #a git pull that doesn't do merges, so won't create merge conflicts
     #process return code to see if there are merge conflicts.  Return code will be 0 if "git pull" is successful.  there shouldn't be merge conflicts since we already checked to make sure the working directory was clean...but...
     if [ "$?" = "0" ]; then
     echo " No git errors detected during our upgrade..."
