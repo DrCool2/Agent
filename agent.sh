@@ -52,7 +52,7 @@ unset SCRIPTDIR #our time together was so short
         return #run rest of program
         fi
 
-#sanity checks complete, attempting to upgrade
+#local repo sanity checks complete, attempting to upgrade
     echo " Git says we are out-dated."
     echo " Trying to upgrade via git..."
     git merge --ff-only  #a git pull that doesn't do merge conflicts
