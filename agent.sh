@@ -16,17 +16,6 @@ CheckForAgentUpdates() {
 echo "Checking for agent update via git..."
 
 #pull the newest code.  the repository should be public over https without any authentication required
-    #if there is a merge conflict, fails with return code 128
-    #this is similar to gull pull but more careful
-    git fetch
-        
-CheckForAgentUpdates() {
-#this function checks for agent updates via git
-#ASSUMPTION: whatever program we are in was something we got via git, and thus that we are in a git repository
-#ASSUMPTION: That the commands within can be ran without any user-interaction.  i.e. that the git repository either requires no authentication or that the administrator has handled this already for us so we can run without interaction
-echo "Checking for agent update via git..."
-
-#pull the newest code.  the repository should be public over https without any authentication required
     #this is similar to gull pull but more careful since we check for merge conflicts
     git fetch
         echo "Trying to upgrade via git..."
