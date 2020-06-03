@@ -61,6 +61,7 @@ unset SCRIPTDIR #our time together was so short
 UpdateGitRepoAndRelaunchScript
 
 echo "Main program begin..."
+exit
 
 UserDir=/home/user1
 
