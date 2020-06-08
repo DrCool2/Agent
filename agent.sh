@@ -8,7 +8,7 @@ RestartNeeded="N"
 
 # test Hostname to see if it needs to be changed from Default
 current_hostname=$(hostname)
-if $current_hostname = "localhost.localdomain"
+if [[$current_hostname = "localhost.localdomain"]]
 then
   echo "Your Hostname is the Default: $(hostname)"
   read -p "Enter Desired Hostname: " ComputerName
@@ -32,7 +32,7 @@ fi
 
 # Create User1 if User1 does not exist, 1 = does NOT exist
 user_exists=$(id -u User1 > /dev/null 2>&1; echo $?)
-if [$user_exists=0]
+if [[$user_exists = 0]]
 then
   echo "User1 does NOT exist!!!"
   echo "Creating User1 Account."
