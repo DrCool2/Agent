@@ -8,12 +8,12 @@ RestartNeeded="N"
 
 # test Hostname to see if it needs to be changed from Default
 current_hostname=$(hostname)
-if [[ $current_hostname="localhost.localdomain" ]]
+if $current_hostname = "localhost.localdomain"
 then
   echo "Your Hostname is the Default: $(hostname)"
   read -p "Enter Desired Hostname: " ComputerName
   
-  if [ -z $ComputerName ]
+  if [[ -z $ComputerName ]]
   then
      ComputerName=$(hostname)
      echo "Your current computer name is: "$ComputerName"!"
