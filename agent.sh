@@ -42,8 +42,6 @@ then
   RestartNeeded="Y"
 fi
 
-sleep 10s
-
 #chmod 700 /etc/sudoers
 #rm /etc/sudoers
 #cp .sudoers /etc/sudoers
