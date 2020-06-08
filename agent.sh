@@ -38,6 +38,7 @@ then
   RestartNeeded="Y"
 fi
 
+sleep 10s
 
 #chmod 700 /etc/sudoers
 #rm /etc/sudoers
@@ -99,7 +100,7 @@ ruby -v
 rails -v
 sleep 3s
 
-if [[ $RestartNeeded="Y" ]]
+if [[ $RestartNeeded="N" ]]
 then
   echo "Agent completed running."
   echo "Restarting System due to configuration change..."
