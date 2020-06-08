@@ -100,5 +100,5 @@ if [[RestartNeeded = "Y"]]
 then
   echo "Restarting System due to configuration change..."
   sleep 3s
-  reboot
+  shutdown -r
 fi
