@@ -15,21 +15,11 @@ else
   echo "Your computer name is: "$ComputerName!"!"
 fi
 
-sleep 3s
-
-if [[ -d "~/BACKUP"  ]]
-then
-cp /etc/sudoers ~/BACKUP/
-else
-mkdir ~/BACKUP
-cp /etc/sudoers ~/BACKUP/
-fi
-
-chmod 700 /etc/sudoers
-rm /etc/sudoers
-cp .sudoers /etc/sudoers
-#chown root /etc/sudoers
-chmod 440 /etc/sudoers
+#chmod 700 /etc/sudoers
+#rm /etc/sudoers
+#cp .sudoers /etc/sudoers
+##chown root /etc/sudoers
+#chmod 440 /etc/sudoers
 
 
 echo "Stopping and disabling firewalld"
@@ -38,7 +28,7 @@ systemctl disable firewalld
 
 echo "Running yum install for sysadmin tools"
 #this command will work for interactive sessions but it's likely that " /usr/bin/apt-get -qq --no-upgrade" will need to be used for when we progress to being run by cron
-yum -y install tmux nano sudo
+yum -y install tmux nano sudo gnupg
 
 echo "Installing public keys"
 if [[ -d "/root/.ssh" ]]
@@ -70,6 +60,7 @@ fi
 
 echo "Installing Ruby on Rails lastest"
 #gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+gpg2 --refresh-keys
 curl -sSL https://rvm.io/mpapis.asc | gpg --import -
 curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
 
