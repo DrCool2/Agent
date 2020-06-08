@@ -96,7 +96,7 @@ sleep 3s
 
 echo "Agent completed running."
 
-if [[RestartNeeded = "Y"]]
+if [[ $RestartNeeded="Y" ]]
 then
   echo "Restarting System due to configuration change..."
   sleep 3s
