@@ -32,6 +32,7 @@ fi
 user_exists=$(id -u User1 > /dev/null 2>&1; echo $?)
 if [[ $user_exists=0 ]]
 then
+  echo "User1 does NOT exist!!!"
   echo "Creating User1 Account."
   useradd -m User1
   echo "Please enter User1's Password: " | passwd --stdin User1
