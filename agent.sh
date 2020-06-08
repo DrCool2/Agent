@@ -131,12 +131,6 @@ echo "Stopping and disabling firewalld"
 systemctl stop firewalld
 systemctl disable firewalld
 
-<<<<<<< HEAD
-echo "Running yum check-update"
-yum check-update  #I don't think those words mean what you think they mean
-
-=======
->>>>>>> AddUser1ToSudoers-MakePasswordless
 echo "Running yum install for sysadmin tools"
 #this command will work for interactive sessions but it's likely that " /usr/bin/apt-get -qq --no-upgrade" will need to be used for when we progress to being run by cron
 yum -y install tmux nano sudo gnupg
