@@ -13,7 +13,7 @@ if [[ $current_hostname = $default_hostname ]]
 then
   echo "Your Hostname is the Default: $(hostname)"
   read -p "Enter Desired Hostname: " ComputerName
-  
+
   if [[ -z $ComputerName ]]
   then
      ComputerName=$(hostname)
