@@ -30,7 +30,7 @@ fi
 
 # Create User1 if User1 does not exist
 user_exists=$(id -u User1 > /dev/null 2>&1; echo $?)
-if [[ user_exists = 0 ]]
+if [[ $user_exists=0 ]]
 then
   echo "Creating User1 Account."
   useradd -m User1
