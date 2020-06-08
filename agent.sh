@@ -10,22 +10,22 @@ if [[$(hostname)="localhost.localdomain"]]
 then
   echo "Your Hostname is the Default: $(hostname)"
   read -p "Enter Desired Hostname: " ComputerName
-fi
-
-if [ -z $ComputerName ]
-then
-  ComputerName=$(hostname)
-  echo "Your current computer name is: "$ComputerName"!"
-  sleep 3s
-else
-  echo "updating /etc/hostname"
-    echo $ComputerName > /etc/hostname
-  echo "updating /etc/hosts"
-    echo "127.0.0.1  localhost "$ComputerName" localhost4 "$ComputerName > /etc/hosts
-    echo "::1  localhost "$ComputerName" localhost6 "$ComputerName >> /etc/hosts
-  RestartNeeded="Y"
-  echo "Your computer name is: "$ComputerName!"!"
-  sleep 3s
+  
+  if [ -z $ComputerName ]
+  then
+     ComputerName=$(hostname)
+     echo "Your current computer name is: "$ComputerName"!"
+      sleep 3s
+  else
+     echo "updating /etc/hostname"
+     echo $ComputerName > /etc/hostname
+     echo "updating /etc/hosts"
+     echo "127.0.0.1  localhost "$ComputerName" localhost4 "$ComputerName > /etc/hosts
+     echo "::1  localhost "$ComputerName" localhost6 "$ComputerName >> /etc/hosts
+      RestartNeeded="Y"
+     echo "Your computer name is: "$ComputerName!"!"
+     sleep 3s
+  fi
 fi
 
 # Create User1 if User1 does not exist
@@ -99,11 +99,12 @@ ruby -v
 rails -v
 sleep 3s
 
-echo "Agent completed running."
-
 if [[ $RestartNeeded="Y" ]]
 then
+  echo "Agent completed running."
   echo "Restarting System due to configuration change..."
   sleep 3s
   shutdown -r
+else
+  echo "Agent completed running."
 fi
