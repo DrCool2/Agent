@@ -6,7 +6,7 @@ echo "Agent started..."
 UserDir=/home/user1
 RestartNeeded="N"
 
-if [ $(hostname)="localhost.localdomain" ]
+if [[ $(hostname)="localhost.localdomain" ]]
 then
   echo "Your Hostname is the Default: $(hostname)"
   read -p "Enter Desired Hostname: " ComputerName
