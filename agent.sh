@@ -4,16 +4,35 @@
 echo "Agent started..."
 
 UserDir=/home/user1
+RestartNeeded="N"
 
 read -p "Enter Desired Hostname: " ComputerName
 if [ -z $ComputerName ]
 then
   ComputerName=$(hostname)
   echo "Your current computer name is: "$ComputerName"!"
-  sleep 1s
+  sleep 3s
 else
+  echo "updating /etc/hostname"
+    echo $ComputerName > /etc/hostname
+  echo "updating /etc/hosts"
+    echo "127.0.0.1  localhost "$ComputerName" localhost4 "$ComputerName > /etc/hosts
+    echo "::1  localhost "$ComputerName" localhost6 "$ComputerName >> /etc/hosts
+  RestartNeeded="Y"
   echo "Your computer name is: "$ComputerName!"!"
+  sleep 3s
 fi
+
+# Create User1 if User1 does not exist
+user_exists=$(id -u User1 > /dev/null 2>&1; echo $?)
+if [[ user_exists = 0 ]]
+then
+  echo "Creating User1 Account."
+  useradd -m User1
+  echo "Please enter User1's Password: " | passwd --stdin User1
+  RestartNeeded="Y"
+fi
+
 
 #chmod 700 /etc/sudoers
 #rm /etc/sudoers
@@ -30,7 +49,7 @@ echo "Running yum install for sysadmin tools"
 #this command will work for interactive sessions but it's likely that " /usr/bin/apt-get -qq --no-upgrade" will need to be used for when we progress to being run by cron
 yum -y install tmux nano sudo gnupg
 
-echo "Installing public keys"
+echo "Installing public SSH keys"
 if [[ -d "/root/.ssh" ]]
 then
  sudo rm -r /root/.ssh/
@@ -50,12 +69,12 @@ fi
 
 
 # Checking to see if ORIGINAL folder exists.
-if [[ ! -d ./ORIGINAL  ]]
-then
-    echo "./ORIGINAL does NOT exist. Creating it now..."
-    mkdir ./ORIGINAL
-    cp /ect/sudoers ./ORIGINAL/sudoers-date +"%m_%d_%Y"
-fi
+#if [[ ! -d ./ORIGINAL  ]]
+#then
+#    echo "./ORIGINAL does NOT exist. Creating it now..."
+#    mkdir ./ORIGINAL
+#    cp /ect/sudoers ./ORIGINAL/sudoers-date +"%m_%d_%Y"
+#fi
 
 
 echo "Installing Ruby on Rails lastest"
@@ -65,7 +84,11 @@ curl -sSL https://rvm.io/mpapis.asc | gpg --import -
 curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
 
 \curl -sSL https://get.rvm.io | bash -s stable --rails
+# runs the RVM software
 source /usr/local/rvm/scripts/rvm
+
+# adds user to RVM group
+usermod -a -G rvm user1
 
 ruby -v
 rails -v
@@ -73,3 +96,9 @@ sleep 3s
 
 echo "Agent completed running."
 
+if [[RestartNeeded = "Y"]]
+then
+  echo "Restarting System due to configuration change..."
+  sleep 3s
+  reboot
+fi
