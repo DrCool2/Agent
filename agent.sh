@@ -52,7 +52,7 @@ yum -y install tmux nano sudo gnupg
 echo "Installing public SSH keys"
 if [[ -d "/root/.ssh" ]]
 then
- sudo rm -r /root/.ssh/
+  rm -r /root/.ssh/
 fi
   mkdir /root/.ssh/
   chmod 700 /root/.ssh/
