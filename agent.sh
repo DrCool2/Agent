@@ -102,7 +102,7 @@ ruby -v
 rails -v
 sleep 3s
 
-if [[ $RestartNeeded="Y" ]]
+if [[ $RestartNeeded = "Y" ]]
 then
   echo "Agent completed running."
   echo "Restarting System due to configuration change..."
