@@ -25,6 +25,14 @@ GitUpdate() {
 END_COMMENT_BLOCK
 echo " GitUpdate Begin."
 
+if [ "$GitUpdateDisabled" = "true" ]; then
+#This toggle is available for development or debugging purposes.  It will skip GitUpdate.
+#to use the toggle, set the following variable in your bash session with 'export' before running this script:
+#export GitUpdateDisabled=true
+gecho "GitUpdateDisabled=true, skipping GitUpdate"
+return
+fi
+
 #cd to calling script directory so we can run git commands
 local SCRIPTDIR="$( cd "$(dirname "$0")" ; pwd -P )"   #directory this script is in
 cd $SCRIPTDIR  #gotta cd (in case someone ran us like "cd /tmp;/root/script.sh") so later git commands will be in the repository we are in
