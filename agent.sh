@@ -131,9 +131,13 @@ echo "Stopping and disabling firewalld"
 systemctl stop firewalld
 systemctl disable firewalld
 
+echo "Running NodeJS installer for Rails and Webpacker:Install to work."
+# installs YARN for Ruby on Rails, rails webpacker:install to work
+curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
+
 echo "Running yum install for sysadmin tools"
 #this command will work for interactive sessions but it's likely that " /usr/bin/apt-get -qq --no-upgrade" will need to be used for when we progress to being run by cron
-yum -y install tmux nano sudo gnupg nodejs
+yum -y install tmux nano sudo gnupg nodejs yarn
 
 echo "Installing public SSH keys"
 if [[ -d "/root/.ssh" ]]
@@ -179,6 +183,7 @@ usermod -a -G rvm user1
 ruby -v
 rails -v
 sleep 3s
+
 
 if [[ $RestartNeeded = "Y" ]]
 then
