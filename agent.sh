@@ -95,6 +95,21 @@ echo "Main program begin..."
 UserDir=/home/user1
 RestartNeeded="N"
 
+echo "Checking Crontab to see if Agent settings have already been applied."
+if [[ crontab -l | grep -c "agent.sh" > 1 ]]
+echo "crontab -l does contain: agent.sh"
+else
+echo "crontab -l does NOT contain: agent.sh"
+echo "adding entry to crontab: 00 * * * * /usr/local/sbin/Agent/agent.sh"
+
+# source https://stackoverflow.com/questions/878600/how-to-create-a-cron-job-using-bash-automatically-without-the-interactive-editor
+# author: MoonCactus
+# date and time accessed: 6-30-2020 12:31pm
+croncmd="/usr/local/sbin/Agent/agent.sh"
+cronjob="00 * * * * $croncmd"
+( crontab -l | grep -v -F "$croncmd" ; echo "$cronjob" ) | crontab -
+fi
+
 # test Hostname to see if it needs to be changed from Default
 current_hostname=$(hostname)
 default_hostname="localhost.localdomain"
