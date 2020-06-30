@@ -2,6 +2,9 @@
 #Agent is a Linux Customization App, designed to efficiently assist with the setup and maintenance of new machines.
 echo "Agent started..."
 
+echo "----------" >> log.txt
+echo "agent.sh started at: "$(date) >> log.txt
+
 BailOut() {
 echo "BailOut: FATAL ERROR!"
 echo "BailOut: $1"
@@ -197,8 +200,11 @@ sudo systemctl restart NetworkManager.service
 
 echo
 echo "current DNS servers are: "
-sudo nmcli | grep DNS -A 3
+echo $(sudo nmcli | grep DNS -A 3)
 echo
+
+echo "----------" >> log.txt
+echo "agent.sh ended at: "$(date) >> log.txt
 
 if [[ $RestartNeeded = "Y" ]]
 then
