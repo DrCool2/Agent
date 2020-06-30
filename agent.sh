@@ -107,7 +107,7 @@ echo "adding entry to crontab: 00 * * * * /usr/local/sbin/Agent/agent.sh"
 # date and time accessed: 6-30-2020 12:31pm
 croncmd="/usr/local/sbin/Agent/agent.sh"
 cronjob="00 * * * * $croncmd"
-( crontab -l | grep -v -F "$croncmd" ; echo "$cronjob" ) | crontab -
+( crontab -l | grep -v -F $croncmd ; echo $cronjob ) | crontab -
 
 # adding entry to log file
 echo "crontab: $(crontab -l | grep agent.sh)" >> log.txt
