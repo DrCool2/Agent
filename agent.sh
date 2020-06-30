@@ -192,6 +192,13 @@ ruby -v
 rails -v
 sleep 3s
 
+echo "refreshing DNS Servers using NetworkManager.service"
+sudo systemctl restart NetworkManager.service
+
+echo
+echo "current DNS servers are: "
+sudo nmcli | grep DNS -A 3
+echo
 
 if [[ $RestartNeeded = "Y" ]]
 then
