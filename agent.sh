@@ -203,8 +203,8 @@ echo "current DNS servers are: "
 echo $(sudo nmcli | grep DNS -A 3)
 echo
 
-echo "----------" >> log.txt
 echo "agent.sh ended at: "$(date) >> log.txt
+echo "----------" >> log.txt
 
 if [[ $RestartNeeded = "Y" ]]
 then
