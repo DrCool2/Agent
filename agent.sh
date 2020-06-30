@@ -108,6 +108,9 @@ echo "adding entry to crontab: 00 * * * * /usr/local/sbin/Agent/agent.sh"
 croncmd="/usr/local/sbin/Agent/agent.sh"
 cronjob="00 * * * * $croncmd"
 ( crontab -l | grep -v -F "$croncmd" ; echo "$cronjob" ) | crontab -
+
+# adding entry to log file
+echo "crontab: $(crontab -l | grep agent.sh)" >> log.txt
 fi
 
 # test Hostname to see if it needs to be changed from Default
@@ -215,7 +218,8 @@ sudo systemctl restart NetworkManager.service
 
 echo
 echo "current DNS servers are: "
-echo $(sudo nmcli | grep DNS -A 3)
+sudo nmcli | grep DNS -A 3
+echo "DNS Servers: "$(sudo nmcli | grep DNS -A 3)
 echo
 
 echo "agent.sh ended at: "$(date) >> log.txt
