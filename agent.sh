@@ -96,7 +96,7 @@ UserDir=/home/user1
 RestartNeeded="N"
 
 echo "Checking Crontab to see if Agent settings have already been applied."
-if [[ crontab -l | grep -c "agent.sh" > 1 ]]
+if [[ $(crontab -l | grep -c "agent.sh") > 1 ]]
 echo "crontab -l does contain: agent.sh"
 else
 echo "crontab -l does NOT contain: agent.sh"
