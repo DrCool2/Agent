@@ -2,8 +2,8 @@
 #Agent is a Linux Customization App, designed to efficiently assist with the setup and maintenance of new machines.
 echo "Agent started..."
 
-echo "----------" >> log.txt
-echo "agent.sh started at: "$(date) >> log.txt
+echo "----------" >> /var/log/agent.log
+echo "agent.sh started at: "$(date) >> /var/log/agent.log
 
 BailOut() {
 echo "BailOut: FATAL ERROR!"
@@ -110,7 +110,7 @@ cronjob="00 * * * * $croncmd"
 ( crontab -l | grep -v -F $croncmd ; echo $cronjob ) | crontab -
 
 # adding entry to log file
-echo "crontab: $(crontab -l | grep agent.sh)" >> log.txt
+echo "crontab: $(crontab -l | grep agent.sh)" >> /var/log/agent.log
 fi
 
 # test Hostname to see if it needs to be changed from Default
@@ -222,8 +222,8 @@ sudo nmcli | grep DNS -A 3
 echo "DNS Servers: "$(sudo nmcli | grep DNS -A 3)
 echo
 
-echo "agent.sh ended at: "$(date) >> log.txt
-echo "----------" >> log.txt
+echo "agent.sh ended at: "$(date) >> /var/log/agent.log
+echo "----------" >> /var/log/agent.log
 
 if [[ $RestartNeeded = "Y" ]]
 then
