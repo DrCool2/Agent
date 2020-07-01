@@ -32,7 +32,7 @@ if [ "$GitUpdateDisabled" = "true" ]; then
 #This toggle is available for development or debugging purposes.  It will skip GitUpdate.
 #to use the toggle, set the following variable in your bash session with 'export' before running this script:
 #export GitUpdateDisabled=true
-gecho "GitUpdateDisabled=true, skipping GitUpdate"
+echo "GitUpdateDisabled=true, skipping GitUpdate"
 return
 fi
 
