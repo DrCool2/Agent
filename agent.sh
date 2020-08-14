@@ -144,7 +144,7 @@ systemctl disable firewalld
 
 echo "Running NodeJS installer for Rails and Webpacker:Install to work."
 # installs YARN for Ruby on Rails, rails webpacker:install to work
-curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
+curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
 
 echo "Running yum install for sysadmin tools"
 #this command will work for interactive sessions but it's likely that " /usr/bin/apt-get -qq --no-upgrade" will need to be used for when we progress to being run by cron
@@ -196,12 +196,12 @@ rails -v
 sleep 3s
 
 echo "refreshing DNS Servers using NetworkManager.service"
-sudo systemctl restart NetworkManager.service
+systemctl restart NetworkManager.service
 
 echo
 echo "current DNS servers are: "
-sudo nmcli | grep DNS -A 3
-echo "DNS Servers: "$(sudo nmcli | grep DNS -A 3)
+nmcli | grep DNS -A 3
+echo "DNS Servers: "$( nmcli | grep DNS -A 3)
 echo
 
 echo "agent.sh ended at: "$(date) >> /var/log/agent.log
